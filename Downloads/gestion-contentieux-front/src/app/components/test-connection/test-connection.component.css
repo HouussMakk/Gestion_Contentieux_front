@@ -1,0 +1,12 @@
+.container {
+    max-width: 800px;
+  }
+  
+  .error {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .list-group-item:hover {
+    background-color: #f8f9fa;
+  }

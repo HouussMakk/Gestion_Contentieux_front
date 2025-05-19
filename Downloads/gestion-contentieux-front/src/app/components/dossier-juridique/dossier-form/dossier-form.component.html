@@ -1,0 +1,134 @@
+<div class="dossier-form-container">
+  <div class="form-header">
+    <h2>{{ isEditMode ? 'Modifier le dossier' : 'Créer un nouveau dossier' }}</h2>
+    <button class="btn-back" (click)="cancel()">
+      <i class="material-icons">arrow_back</i>
+      Retour
+    </button>
+  </div>
+
+  <div *ngIf="loading" class="loading-indicator">
+    <p>Chargement des données...</p>
+  </div>
+
+  <form [formGroup]="dossierForm" (ngSubmit)="onSubmit()" *ngIf="!loading">
+    <div class="form-grid">
+      <div class="form-group">
+        <label for="referenceDossier">Référence *</label>
+        <input
+          type="text"
+          id="referenceDossier"
+          formControlName="referenceDossier"
+          [readOnly]="isEditMode"
+          [class.is-invalid]="dossierForm.get('referenceDossier')?.invalid && dossierForm.get('referenceDossier')?.touched"
+        >
+        <div class="error-message" *ngIf="dossierForm.get('referenceDossier')?.invalid && dossierForm.get('referenceDossier')?.touched">
+          La référence est requise
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="qualiteAgence">Qualité Agence *</label>
+        <select
+          id="qualiteAgence"
+          formControlName="qualiteAgence"
+          [class.is-invalid]="dossierForm.get('qualiteAgence')?.invalid && dossierForm.get('qualiteAgence')?.touched"
+        >
+          <option value="">Sélectionner...</option>
+          <option value="Demandeur">Demandeur</option>
+          <option value="Défendeur">Défendeur</option>
+        </select>
+        <div class="error-message" *ngIf="dossierForm.get('qualiteAgence')?.invalid && dossierForm.get('qualiteAgence')?.touched">
+          La qualité de l'agence est requise
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="natureLitige">Nature du Litige *</label>
+        <input
+          type="text"
+          id="natureLitige"
+          formControlName="natureLitige"
+          [class.is-invalid]="dossierForm.get('natureLitige')?.invalid && dossierForm.get('natureLitige')?.touched"
+        >
+        <div class="error-message" *ngIf="dossierForm.get('natureLitige')?.invalid && dossierForm.get('natureLitige')?.touched">
+          La nature du litige est requise
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="objetLitige">Objet du Litige *</label>
+        <input
+          type="text"
+          id="objetLitige"
+          formControlName="objetLitige"
+          [class.is-invalid]="dossierForm.get('objetLitige')?.invalid && dossierForm.get('objetLitige')?.touched"
+        >
+        <div class="error-message" *ngIf="dossierForm.get('objetLitige')?.invalid && dossierForm.get('objetLitige')?.touched">
+          L'objet du litige est requis
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="instanceJudiciaire">Instance Judiciaire *</label>
+        <input
+          type="text"
+          id="instanceJudiciaire"
+          formControlName="instanceJudiciaire"
+          [class.is-invalid]="dossierForm.get('instanceJudiciaire')?.invalid && dossierForm.get('instanceJudiciaire')?.touched"
+        >
+        <div class="error-message" *ngIf="dossierForm.get('instanceJudiciaire')?.invalid && dossierForm.get('instanceJudiciaire')?.touched">
+          L'instance judiciaire est requise
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="codePort">Port</label>
+        <select id="codePort" formControlName="codePort">
+          <option value="">Sélectionner...</option>
+          <option value="PORT1">Port 1</option>
+          <option value="PORT2">Port 2</option>
+          <option value="PORT3">Port 3</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="partieAdverseId">Partie Adverse</label>
+        <select id="partieAdverseId" formControlName="partieAdverseId">
+          <option value="">Sélectionner...</option>
+          <option [value]="1">Partie Adverse 1</option>
+          <option [value]="2">Partie Adverse 2</option>
+          <option [value]="3">Partie Adverse 3</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="stadeLitigeId">Stade Litige</label>
+        <select id="stadeLitigeId" formControlName="stadeLitigeId">
+          <option value="">Sélectionner...</option>
+          <option [value]="1">En cours</option>
+          <option [value]="2">Clos</option>
+          <option [value]="3">En attente</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="avocatId">Avocat</label>
+        <select id="avocatId" formControlName="avocatId">
+          <option value="">Sélectionner...</option>
+          <option [value]="1">Avocat 1</option>
+          <option [value]="2">Avocat 2</option>
+          <option [value]="3">Avocat 3</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" class="btn-cancel" (click)="cancel()">Annuler</button>
+      <button type="submit" class="btn-submit" [disabled]="submitting">
+        <span *ngIf="!submitting">{{ isEditMode ? 'Enregistrer les modifications' : 'Créer le dossier' }}</span>
+        <span *ngIf="submitting">Traitement en cours...</span>
+      </button>
+    </div>
+  </form>
+</div>

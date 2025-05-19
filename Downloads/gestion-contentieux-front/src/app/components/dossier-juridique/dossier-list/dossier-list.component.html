@@ -1,0 +1,77 @@
+<div class="dossier-list-container">
+  <div class="actions-bar">
+    <h2>Liste des Dossiers Juridiques</h2>
+    <div class="action-buttons">
+      <button class="btn-search">
+        <i class="material-icons">search</i>
+        <span>Rechercher</span>
+      </button>
+      <button class="btn-add" routerLink="new">
+        <i class="material-icons">add</i>
+        <span>Nouveau Dossier</span>
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="loading-indicator">
+    <p>Chargement des dossiers...</p>
+  </div>
+
+  <div *ngIf="error" class="error-message">
+    <p>{{ error }}</p>
+    <button (click)="loadDossiers()">Réessayer</button>
+  </div>
+
+  <div *ngIf="!loading && !error" class="dossier-table-container">
+    <table class="dossier-table">
+      <thead>
+      <tr>
+        <th>Référence</th>
+        <th>Qualité Agence</th>
+        <th>Nature du Litige</th>
+        <th>Instance Judiciaire</th>
+        <th>Stade Litige</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let dossier of dossiers">
+        <td>{{ dossier.referenceDossier }}</td>
+        <td>{{ dossier.qualiteAgence }}</td>
+        <td>{{ dossier.natureLitige }}</td>
+        <td>{{ dossier.instanceJudiciaire }}</td>
+        <td>
+            <span class="status-badge" [ngClass]="dossier.stadeLitige === 'En cours' ? 'status-in-progress' : dossier.stadeLitige === 'Clos' ? 'status-closed' : 'status-pending'">
+              {{ dossier.stadeLitige }}
+            </span>
+        </td>
+        <td class="actions-column">
+          <button class="action-icon view" [routerLink]="[dossier.referenceDossier]">
+            <i class="material-icons">visibility</i>
+          </button>
+          <button class="action-icon edit" [routerLink]="['edit', dossier.referenceDossier]">
+            <i class="material-icons">edit</i>
+          </button>
+          <button class="action-icon delete" (click)="deleteDossier(dossier.referenceDossier)">
+            <i class="material-icons">delete</i>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+    <div *ngIf="dossiers.length === 0" class="no-data">
+      <p>Aucun dossier disponible</p>
+    </div>
+
+    <div class="pagination">
+      <button class="pagination-btn" disabled>
+        <i class="material-icons">chevron_left</i>
+      </button>
+      <span class="page-indicator">Page 1 sur 1</span>
+      <button class="pagination-btn" disabled>
+        <i class="material-icons">chevron_right</i>
+      </button>
+    </div>
+  </div>
+</div>

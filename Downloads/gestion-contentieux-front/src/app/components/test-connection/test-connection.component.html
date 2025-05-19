@@ -1,0 +1,27 @@
+<div class="container mt-4">
+    <h2>Testing API Connection</h2>
+    
+    <div *ngIf="loading">
+      <p>Loading data...</p>
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    
+    <div *ngIf="error" class="alert alert-danger">
+      {{ error }}
+    </div>
+    
+    <div *ngIf="!loading && !error">
+      <div *ngIf="dossiers?.length === 0" class="alert alert-info">
+        No dossiers found in the database.
+      </div>
+      
+      <ul class="list-group mt-3" *ngIf="dossiers?.length > 0">
+        <li class="list-group-item" *ngFor="let dossier of dossiers">
+          <strong>{{ dossier?.referenceDossier || 'No Reference' }}</strong> - 
+          {{ dossier?.natureLitige || 'No Nature' }}
+        </li>
+      </ul>
+    </div>
+  </div>

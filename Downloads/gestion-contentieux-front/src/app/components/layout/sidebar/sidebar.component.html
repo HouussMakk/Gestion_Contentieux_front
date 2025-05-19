@@ -1,0 +1,19 @@
+<div class="sidebar">
+  <div class="logo-container">
+    <img src="assets/logo.png" alt="Logo" class="logo">
+    <span class="app-title">Gestion Contentieux</span>
+  </div>
+
+  <div class="menu-container">
+    <div class="menu-header">MAIN MENU</div>
+    <ul class="menu-list">
+      <li *ngFor="let item of menuItems"
+          [routerLink]="item.route"
+          routerLinkActive="active-link"
+          class="menu-item">
+        <i class="material-icons">{{item.icon}}</i>
+        <span>{{item.title}}</span>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,63 @@
+/* You can add global styles to this file, and also import other style files */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background-color: #f5f5f5;
+    color: #333;
+    line-height: 1.5;
+  }
+  
+  /* Main content area adjustments */
+  .main-content {
+    margin-left: 250px;
+    padding-top: 60px;
+    min-height: calc(100vh - 60px);
+    transition: margin-left 0.3s ease;
+  }
+  
+  /* Main content area when sidebar is collapsed */
+  .main-content.sidebar-collapsed {
+    margin-left: 60px;
+  }
+  
+  /* Content container */
+  .content-wrapper {
+    padding: 20px;
+  }
+  
+  /* Utility Classes */
+  .d-flex {
+    display: flex;
+  }
+  
+  .align-items-center {
+    align-items: center;
+  }
+  
+  .justify-content-between {
+    justify-content: space-between;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .main-content {
+      margin-left: 0;
+    }
+    
+    .sidebar {
+      transform: translateX(-100%);
+    }
+    
+    .sidebar.mobile-visible {
+      transform: translateX(0);
+    }
+  }
+  
+  /* If you want to use Font Awesome, uncomment this import */
+  /* @import '~@fortawesome/fontawesome-free/css/all.min.css'; */
